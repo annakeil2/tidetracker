@@ -71,3 +71,39 @@ button:hover {
   margin-top: 0.4rem;
   font-weight: bold;
 }
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  height: 18px;
+  background: #fde68a;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: #86efac;
+  transition: width 0.3s ease;
+}
+
+/* Application list */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.application {
+  padding: 1rem;
+  border-radius: 14px;
+  margin-bottom: 0.8rem;
+  background: #f9fafb;
+}
+
+.application.priority {
+  background: #fce7f3; /* soft pink */
+  border: 2px solid #f9a8d4;
+}
+
