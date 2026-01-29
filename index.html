@@ -12,3 +12,35 @@
     <h1>OneMoreApp</h1>
     <p class="subtitle">Own your job search, one step at a time.</p>
   </header>
+
+  <main>
+    <!-- FORM SECTION -->
+    <section class="form-section">
+      <h2>Add an application</h2>
+        <h3>Only focus on your next step</h3>
+      <form id="ApplicationForm">
+        <div class="row">
+          <input type="text" id="company" placeholder="Company" required />
+          <input type="text" id="role" placeholder="Role / Position" required />
+          <select id="status">
+            <option value="Applied">Applied</option>
+            <option value="Applied">Initial Screen Completed</option>
+            <option value="Interview">1st Interview</option>
+            <option value="Interview">Final Interview</option>
+            <option value="Offer">Offered</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+
+        <textarea id="notes" placeholder="Notes (recruiter name and contact, next steps, your thoughts…)"></textarea>
+
+        <label class="star-label">
+          <input type="checkbox" id="priority" />
+          ⭐ Mark as priority
+        </label>
+
+        <button type="submit">Add application</button>
+      </form>
+
+      <p id="feedback"></p>
+    </section>
