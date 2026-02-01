@@ -7,7 +7,7 @@ const feedback = document.getElementById("feedback");
 let applications = [];
 
 const messages = [
-  "I see you've started, well done! Only focus on the next step.",
+  "You've started, well done! Only focus on the next step.",
   "Look at you go, you little rockstar!",
   "Great! Try to submit at least one more. Future you will thank you!",
   "Five already?! 100% main character energy!"
