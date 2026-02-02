@@ -115,3 +115,47 @@ ul {
   border: 2px solid #f9a8d4;
 }
 
+.application-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-details {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.app-details span {
+  font-weight: bold;
+}
+
+.status-Applied { color: #3b82f6; }
+.status-Interview { color: #f59e0b; }
+.status-Offer { color: #16a34a; }
+.status-Rejected { color: #ef4444; }
+
+.notes {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.delete-btn {
+  background: #fca5a5;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+}

@@ -1,4 +1,4 @@
-const form = document.getElementById("applicationForm");
+const form = document.getElementById("ApplicationForm");
 const list = document.getElementById("applicationList");
 const progressFill = document.getElementById("progressFill");
 const encouragement = document.getElementById("encouragement");
@@ -9,6 +9,91 @@ let applications = [];
 const messages = [
   "You've started, well done! Only focus on the next step.",
   "Look at you go, you little rockstar!",
+  "Over halfway already!",
   "Great! Try to submit at least one more. Future you will thank you!",
   "Five already?! 100% main character energy!"
 ];
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const company = document.getElementById("company").value.trim();
+  const role = document.getElementById("role").value.trim();
+  const status = document.getElementById("applicationStatus").value;
+  const notes = document.getElementById("notes").value.trim();
+  const priority = document.getElementById("priority").checked;
+
+  if (!company || !role) {
+    feedback.textContent = "Future you needs at least a company and role";
+    feedback.style.color = "#e95237ff";
+    return;
+  }
+
+  const application = { company, role, status, notes, priority };
+  applications.push(application);
+
+  addApplicationToDOM(application);
+  updateProgress();
+
+  feedback.textContent = priority
+    ? "Priority added. Eyes on this one!"
+    : "Application successfully added";
+
+  feedback.style.color = "#19b954ff";
+  form.reset();
+});
+
+function addApplicationToDOM(app) {
+  const li = document.createElement("li");
+  li.className = "application";
+  if (app.priority) li.classList.add("priority");
+
+  li.innerHTML = `
+    <div class="application-header">
+      <div class="app-details">
+        ${app.priority ? "⭐" : ""}
+        <span>${app.company}</span>
+        <span>${app.role}</span>
+        <span class="status-${app.status}">${app.status}</span>
+      </div>
+      <button class="delete-btn">Delete</button>
+    </div>
+    ${app.notes ? `<div class="notes">Your notes ${app.notes}</div>` : ""}
+  `;
+
+    li.querySelector(".delete-btn").addEventListener("click", () => {
+    applications = applications.filter(a => a !== app);
+    li.remove();
+    updateProgress();
+  });
+
+  list.appendChild(li);
+}
+
+function updateProgress() {
+  const count = applications.length;
+  const goal = 5;
+
+  progressFill.style.width =
+    Math.min((count / goal) * 100, 100) + "%";
+
+  encouragement.textContent =
+    messages[Math.min(count - 1, messages.length - 1)];
+}
+
+function clearFeedback (){
+    // console.log ("ClearFeedback")
+    const feedback = document.getElementById("feedback");
+    feedback.innerHTML = "";
+}
+const company = document.getElementById("company");
+company.addEventListener ("click", clearFeedback);
+
+const role = document.getElementById("role");
+role.addEventListener ("click", clearFeedback);
+
+const notes = document.getElementById("notes");
+notes.addEventListener ("click", clearFeedback);
+
+const applicationStatus = document.getElementById("applicationStatus");
+applicationStatus.addEventListener ("click", clearFeedback);

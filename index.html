@@ -1,77 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OneMoreApp - Application Tracker</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 </head>
-<body>
-    <div class="pagewrapper">
-  <header>
-    <h1>OneMoreApp</h1>
-    <p class="subtitle">Look at you owning your job search, one step at a time</p>
-  </header>
 
-  <main>
-    <!-- FORM SECTION -->
-    <section class="form-section">
-      <h2>Add an application</h2>
+<body>
+  <div class="pagewrapper">
+    <header>
+      <h1>OneMoreApp</h1>
+      <p class="subtitle">Look at you owning your job search, one step at a time</p>
+    </header>
+
+    <main>
+      <!-- FORM SECTION -->
+      <section class="form-section">
+        <h2>Add an application</h2>
         <h3>Only focus on the next step</h3>
-      <form id="ApplicationForm">
-        <div class="row">
-          <input type="text" id="company" placeholder="Company" required />
-          <input type="text" id="role" placeholder="Role / Position" required />
-          <select id="status">
-            <option value="Applied">Applied</option>
-            <option value="Applied">Initial Screen Completed</option>
-            <option value="Interview">1st Interview</option>
-            <option value="Interview">Final Interview</option>
-            <option value="Offer">Offered</option>
-            <option value="Rejected">Rejected</option>
-          </select>
+        <form id="ApplicationForm">
+          <div class="row">
+            <input type="text" id="company" placeholder="Company" required />
+            <input type="text" id="role" placeholder="Role / Position" required />
+            <select id="applicationStatus">
+              <option value="Applied">Applied</option>
+              <option value="InitialScreen">Initial Screen Completed</option>
+              <option value="FirstInterview">1st Interview</option>
+              <option value="FinalInterview">Final Interview</option>
+              <option value="Offered">Offered</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
+          <textarea id="notes" placeholder="Notes (recruiter name and contact, next steps, your thoughts…)"></textarea>
+
+          <label class="star-label">
+            <input type="checkbox" id="priority" />
+            ⭐ Mark as priority (dream job alert!)
+          </label>
+
+          <button type="submit">Add application</button>
+        </form>
+
+        <p id="feedback"></p>
+      </section>
+
+      <!-- STATS SECTION -->
+      <section class="stats-section">
+        <h2>Daily goal</h2>
+        <p class="goal-text">Aim for <strong>5 applications</strong> today</p>
+
+        <div class="progress-bar">
+          <div id="progressFill"></div>
         </div>
 
-        <textarea id="notes" placeholder="Notes (recruiter name and contact, next steps, your thoughts…)"></textarea>
+        <p id="encouragement">Let’s begin submitting that first application for today.</p>
+      </section>
 
-        <label class="star-label">
-          <input type="checkbox" id="priority" />
-          ⭐ Mark as priority (dream job alert!)
-        </label>
+      <!-- APPLICATION LIST -->
 
-        <button type="submit">Add application</button>
-      </form>
+      <section class="list-section">
+        <h2>Your applications</h2>
+        <ul id="applicationList"></ul>
+      </section>
+    </main>
 
-      <p id="feedback"></p>
-    </section>
+    <footer>
+      <p>OneMoreApp · Built for you by Imaginary Recruiting Agency.</p>
+    </footer>
 
-    <!-- STATS SECTION -->
-    <section class="stats-section">
-      <h2>Daily goal</h2>
-      <p class="goal-text">Aim for <strong>5 applications</strong> today</p>
-
-      <div class="progress-bar">
-        <div id="progressFill"></div>
-      </div>
-
-      <p id="encouragement">Let’s gently begin ✨</p>
-    </section>
-
-    <!-- APPLICATION LIST -->
-     
-    <section class="list-section">
-      <h2>Your applications</h2>
-      <ul id="applicationList"></ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Sprout · Built with HTML, CSS & JavaScript</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
+  </div>
 </body>
+
 </html>
