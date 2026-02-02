@@ -21,17 +21,19 @@ const applicationStatusMap = {
   "FinalInterview": "Final Interview",
   "Offered": "Offered",
   "Rejected": "Rejected"
-}
+};
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const company = document.getElementById("company").value.trim();
   const role = document.getElementById("role").value.trim();
-  const status = document.getElementById("applicationStatus").value;
+  const rawStatus = document.getElementById("applicationStatus").value;
   const notes = document.getElementById("notes").value.trim();
   const priority = document.getElementById("priority").checked;
 
+  const status = applicationStatusMap[rawStatus]
+ 
   if (!company || !role) {
     feedback.textContent = "Future you needs at least a company and role";
     feedback.style.color = "#e95237ff";
