@@ -20,7 +20,7 @@ const applicationStatusMap = {
   "FirstInterview": "1st Interview",
   "FinalInterview": "Final Interview",
   "Offered": "Offered",
-  "Rejected": "Rejected"
+  "Rejected": "Rejected",
 };
 
 form.addEventListener("submit", function (event) {
@@ -40,7 +40,7 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
-  const application = { company, role, status, notes, priority };
+  const application = { company, role, status, rawStatus, notes, priority };
   applications.push(application);
 
   addApplicationToDOM(application);
@@ -54,24 +54,53 @@ form.addEventListener("submit", function (event) {
   form.reset();
 });
 
+
+function createDropdown(parent, optionsMap, selectedKey){
+  const select = document.createElement("select");
+
+
+  let options = [];
+  for (let key in optionsMap){
+    const text = optionsMap[key];
+    const selected = (selectedKey === key) ? " selected" : "";
+    options.push(`<option value="${key}"${selected}>${text}</option>`)
+  }
+  select.innerHTML = options.join("\n")
+
+  parent.appendChild(select);
+
+    
+}
+
+
+
+
 function addApplicationToDOM(app) {
   const li = document.createElement("li");
   li.className = "application";
   if (app.priority) li.classList.add("priority");
 
+  const now = Date.now();
+  const generatedDropdownId = `generatedDropdown${now}`;
+
   li.innerHTML = `
     <div class="application-header">
       <div class="app-details">
-        ${app.priority ? "⭐" : ""}
+        ${(app.priority) ? "⭐" : ""}
         <span>${app.company}</span>
         <span>${app.role}</span>
-        <span class="status-${app.status}">${app.status}</span>
+        <span id="${generatedDropdownId}" class="status-${app.rawStatus}"></span>
       </div>
       <button class="delete-btn">Delete</button>
     </div>
-    ${app.notes ? `<div class="notes">Your notes ${app.notes}</div>` : ""}
+    ${app.notes ? `<div class="notes">Your notes: ${app.notes}</div>` : ""}
   `;
 
+
+
+
+
+//  <span class="status-${app.rawStatus}">${app.status}</span>
     li.querySelector(".delete-btn").addEventListener("click", () => {
     applications = applications.filter(a => a !== app);
     li.remove();
@@ -79,6 +108,8 @@ function addApplicationToDOM(app) {
   });
 
   list.appendChild(li);
+  const generatedDropdown = document.getElementById(generatedDropdownId);
+  createDropdown (generatedDropdown, applicationStatusMap, app.rawStatus);
 }
 
 function updateProgress() {
