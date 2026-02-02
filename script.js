@@ -14,6 +14,15 @@ const messages = [
   "Five already?! 100% main character energy!"
 ];
 
+const applicationStatusMap = {
+  "Applied": "Applied",
+  "InitialScreen": "Initial Screen",
+  "FirstInterview": "1st Interview",
+  "FinalInterview": "Final Interview",
+  "Offered": "Offered",
+  "Rejected": "Rejected"
+}
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
