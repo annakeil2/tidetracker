@@ -40,7 +40,17 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
-  const application = { company, role, status, rawStatus, notes, priority };
+  // Application object
+  const application = { 
+    company, 
+    role, 
+    status, 
+    rawStatus, 
+    notes, 
+    priority,
+    createdAt: new Date()  //this is a constructor
+  };
+
   applications.push(application);
 
   addApplicationToDOM(application);
@@ -73,15 +83,40 @@ function createDropdown(parent, optionsMap, selectedKey){
 }
 
 
+/**
+ * @param {Date} date 
+ */
+function timeStamp(date) {
+  const year = date.getFullYear();
+  let month = date.getMonth()+1;
+  let day = date.getDate();
 
+  if (month <10) {
+    month = "0" + month;
+  }
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  
+  return(`${year}-${month}-${day}`);
+}
 
 function addApplicationToDOM(app) {
   const li = document.createElement("li");
   li.className = "application";
-  if (app.priority) li.classList.add("priority");
+  if (app.priority) {
+    li.classList.add("priority");
+  } 
 
   const now = Date.now();
   const generatedDropdownId = `generatedDropdown${now}`;
+  const notesWrapper = (app.notes) 
+    ? `<div class="notes-wrapper">
+        <div class="notes">Your notes: ${app.notes}</div>
+        <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
+      </div>`
+    : "";
 
   li.innerHTML = `
     <div class="application-header">
@@ -93,8 +128,9 @@ function addApplicationToDOM(app) {
       </div>
       <button class="delete-btn">Delete</button>
     </div>
-    ${app.notes ? `<div class="notes">Your notes: ${app.notes}</div>` : ""}
-  `;
+    ${notesWrapper}
+  
+    `;
 
 
 

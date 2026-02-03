@@ -133,8 +133,8 @@ ul {
 }
 
 .status-Applied { color: #3b82f6; }
-.status-Interview { color: #f59e0b; }
-.status-Offer { color: #16a34a; }
+.status-Interview { color: #c98105; }
+.status-Offer { color: #be319f; }
 .status-Rejected { color: #ef4444; }
 
 .notes {
@@ -151,6 +151,12 @@ ul {
   border-radius: 999px;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+.notes-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Responsive */
