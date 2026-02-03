@@ -38,7 +38,7 @@ form {
   
 }
 
-.row {
+.form-wrapper {
   display: flex;
   gap: 1.5rem;
 }
@@ -161,7 +161,7 @@ ul {
 
 /* Responsive */
 @media (max-width: 600px) {
-  .row {
+  .form-wrapper {
     flex-direction: column;
   }
 }
