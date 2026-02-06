@@ -11,7 +11,8 @@ const messages = [
   "Look at you go, you little rockstar!",
   "Over halfway already!",
   "Great! Try to submit at least one more. Future you will thank you!",
-  "Five already?! 100% main character energy!"
+  "Five already?! 100% main character energy!",
+  "I see you've decided to keep going. I don't have to tell you how amazing you are, right?"
 ];
 
 const applicationStatusMap = {
