@@ -4,7 +4,14 @@ const progressFill = document.getElementById("progressFill");
 const encouragement = document.getElementById("encouragement");
 const feedback = document.getElementById("feedback");
 
-let applications = [];
+const applicationStatusMap = {
+  "Applied": "Applied",
+  "InitialScreen": "Initial Screen",
+  "FirstInterview": "1st Interview",
+  "FinalInterview": "Final Interview",
+  "Offered": "Offered",
+  "Rejected": "Rejected",
+};
 
 const messages = [
   "You've started, well done! Only focus on the next step.",
@@ -15,14 +22,14 @@ const messages = [
   "I see you've decided to keep going. I don't have to tell you how amazing you are, right?"
 ];
 
-const applicationStatusMap = {
-  "Applied": "Applied",
-  "InitialScreen": "Initial Screen",
-  "FirstInterview": "1st Interview",
-  "FinalInterview": "Final Interview",
-  "Offered": "Offered",
-  "Rejected": "Rejected",
-};
+let applications = loadApplications();
+for (let i = 0; i < applications.length; i++){
+  addApplicationToDOM(applications[i])
+}
+
+  // updateProgress();
+
+
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -64,6 +71,8 @@ form.addEventListener("submit", function (event) {
   addApplicationToDOM(application);
   updateProgress();
 
+  saveApplications(applications);
+
   feedback.textContent = priority
     ? "Priority added. Eyes on this one!"
     : "Application successfully added";
@@ -72,6 +81,31 @@ form.addEventListener("submit", function (event) {
   form.reset();
 });
 
+function saveApplications (applications){
+  const jsonApplications = JSON.stringify(applications);
+  localStorage.setItem('applications', jsonApplications);
+}
+
+function loadApplications (){
+  const jsonApplications = localStorage.getItem('applications');
+  if(!jsonApplications){
+    return [];
+  }
+  const results = JSON.parse(jsonApplications);
+  for (let i = 0; i < results.length; i++){
+    const result = results[i];
+    results[i] = { 
+      company: result.company, 
+      role: result.role, 
+      status: result.status,
+      rawStatus: result.rawStatus, 
+      notes: result.notes, 
+      priority: result.priority,
+      createdAt: new Date(result.createdAt)
+    };
+  }
+  return results;
+}
 
 function createDropdown(parent, optionsMap, selectedKey){
   const select = document.createElement("select");
@@ -117,8 +151,8 @@ function addApplicationToDOM(app) {
     li.classList.add("priority");
   } 
 
-  const now = Date.now();
-  const generatedDropdownId = `generatedDropdown${now}`;
+  const createdAt = app.createdAt.getTime();
+  const generatedDropdownId = `generatedDropdown${createdAt}`;
   const notesWrapper = (app.notes) 
     ? `<div class="notes-wrapper">
         <div class="notes">Your notes: ${app.notes}</div>
