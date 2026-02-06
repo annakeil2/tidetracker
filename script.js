@@ -107,7 +107,7 @@ function loadApplications (){
   return results;
 }
 
-function createDropdown(parent, optionsMap, selectedKey){
+function createDropdown(parent, optionsMap, selectedKey, onChange){
   const select = document.createElement("select");
 
 
@@ -118,7 +118,7 @@ function createDropdown(parent, optionsMap, selectedKey){
     options.push(`<option value="${key}"${selected}>${text}</option>`)
   }
   select.innerHTML = options.join("\n")
-
+  select.addEventListener("change", onChange);
   parent.appendChild(select);
 
     
@@ -174,12 +174,8 @@ function addApplicationToDOM(app) {
   
     `;
 
-
-
-
-
 //  <span class="status-${app.rawStatus}">${app.status}</span>
-    li.querySelector(".delete-btn").addEventListener("click", () => {
+  li.querySelector(".delete-btn").addEventListener("click", () => {
     applications = applications.filter(a => a !== app);
     li.remove();
     updateProgress();
@@ -187,7 +183,17 @@ function addApplicationToDOM(app) {
 
   list.appendChild(li);
   const generatedDropdown = document.getElementById(generatedDropdownId);
-  createDropdown (generatedDropdown, applicationStatusMap, app.rawStatus);
+  createDropdown (
+    generatedDropdown, 
+    applicationStatusMap, 
+    app.rawStatus, 
+    function(event){
+      console.log(event)
+      app.rawStatus = event.target.value;
+      app.status = applicationStatusMap[event.target.value];
+      saveApplications(applications);
+    }
+  );
 }
 
 function updateProgress() {
