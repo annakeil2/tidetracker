@@ -36,10 +36,17 @@ form.addEventListener("submit", function (event) {
   const status = applicationStatusMap[rawStatus]
  
   if (!company || !role) {
-    feedback.textContent = "Future you needs at least a company and role";
-    feedback.style.color = "#e95237ff";
+    feedback.textContent = "Future you needs at least a company and a role in order to keep track.";
+    feedback.style.color = "#c42307ff";
     return;
   }
+
+ if (company.length < 2 || role.length < 2) {
+    feedback.innerHTML = "You must enter at least 2 characters in the 'company' and 'role' fields<br>- Future You'll be delighted.";
+    feedback.style.color = "#eb4325ff";
+    return;
+  }
+
 
   // Application object
   const application = { 
