@@ -23,11 +23,11 @@ const messages = [
 ];
 
 let applications = loadApplications();
-for (let i = 0; i < applications.length; i++){
+for (let i = 0; i < applications.length; i++) {
   addApplicationToDOM(applications[i])
 }
 
-  // updateProgress();
+// updateProgress();
 
 
 
@@ -41,14 +41,14 @@ form.addEventListener("submit", function (event) {
   const priority = document.getElementById("priority").checked;
 
   const status = applicationStatusMap[rawStatus]
- 
+
   if (!company || !role) {
     feedback.textContent = "Future you needs at least a company and a role in order to keep track.";
     feedback.style.color = "#c42307ff";
     return;
   }
 
- if (company.length < 2 || role.length < 2) {
+  if (company.length < 2 || role.length < 2) {
     feedback.innerHTML = "You must enter at least 2 characters in the 'company' and 'role' fields<br>- Future You'll be delighted.";
     feedback.style.color = "#eb4325ff";
     return;
@@ -56,12 +56,12 @@ form.addEventListener("submit", function (event) {
 
 
   // Application object
-  const application = { 
-    company, 
-    role, 
-    status, 
-    rawStatus, 
-    notes, 
+  const application = {
+    company,
+    role,
+    status,
+    rawStatus,
+    notes,
     priority,
     createdAt: new Date()  //this is a constructor
   };
@@ -81,25 +81,25 @@ form.addEventListener("submit", function (event) {
   form.reset();
 });
 
-function saveApplications (applications){
+function saveApplications(applications) {
   const jsonApplications = JSON.stringify(applications);
   localStorage.setItem('applications', jsonApplications);
 }
 
-function loadApplications (){
+function loadApplications() {
   const jsonApplications = localStorage.getItem('applications');
-  if(!jsonApplications){
+  if (!jsonApplications) {
     return [];
   }
   const results = JSON.parse(jsonApplications);
-  for (let i = 0; i < results.length; i++){
+  for (let i = 0; i < results.length; i++) {
     const result = results[i];
-    results[i] = { 
-      company: result.company, 
-      role: result.role, 
+    results[i] = {
+      company: result.company,
+      role: result.role,
       status: result.status,
-      rawStatus: result.rawStatus, 
-      notes: result.notes, 
+      rawStatus: result.rawStatus,
+      notes: result.notes,
       priority: result.priority,
       createdAt: new Date(result.createdAt)
     };
@@ -107,12 +107,12 @@ function loadApplications (){
   return results;
 }
 
-function createDropdown(parent, optionsMap, selectedKey, onChange){
+function createDropdown(parent, optionsMap, selectedKey, onChange) {
   const select = document.createElement("select");
 
 
   let options = [];
-  for (let key in optionsMap){
+  for (let key in optionsMap) {
     const text = optionsMap[key];
     const selected = (selectedKey === key) ? " selected" : "";
     options.push(`<option value="${key}"${selected}>${text}</option>`)
@@ -121,27 +121,26 @@ function createDropdown(parent, optionsMap, selectedKey, onChange){
   select.addEventListener("change", onChange);
   parent.appendChild(select);
 
-    
-}
 
+}
 
 /**
  * @param {Date} date 
  */
 function timeStamp(date) {
   const year = date.getFullYear();
-  let month = date.getMonth()+1;
+  let month = date.getMonth() + 1;
   let day = date.getDate();
 
-  if (month <10) {
+  if (month < 10) {
     month = "0" + month;
   }
 
   if (day < 10) {
     day = "0" + day;
   }
-  
-  return(`${year}-${month}-${day}`);
+
+  return (`${year}-${month}-${day}`);
 }
 
 function addApplicationToDOM(app) {
@@ -149,11 +148,11 @@ function addApplicationToDOM(app) {
   li.className = "application";
   if (app.priority) {
     li.classList.add("priority");
-  } 
+  }
 
   const createdAt = app.createdAt.getTime();
   const generatedDropdownId = `generatedDropdown${createdAt}`;
-  const notesWrapper = (app.notes) 
+  const notesWrapper = (app.notes)
     ? `<div class="notes-wrapper">
         <div class="notes">Your notes: ${app.notes}</div>
         <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
@@ -171,23 +170,24 @@ function addApplicationToDOM(app) {
       <button class="delete-btn">Delete</button>
     </div>
     ${notesWrapper}
-  
     `;
 
-//  <span class="status-${app.rawStatus}">${app.status}</span>
   li.querySelector(".delete-btn").addEventListener("click", () => {
-    applications = applications.filter(a => a !== app);
+    applications = applications.filter(function (a) {
+      return a !== app;
+    });
     li.remove();
     updateProgress();
+    saveApplications(applications);
   });
 
   list.appendChild(li);
   const generatedDropdown = document.getElementById(generatedDropdownId);
-  createDropdown (
-    generatedDropdown, 
-    applicationStatusMap, 
-    app.rawStatus, 
-    function(event){
+  createDropdown(
+    generatedDropdown,
+    applicationStatusMap,
+    app.rawStatus,
+    function (event) {
       console.log(event)
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
@@ -207,19 +207,19 @@ function updateProgress() {
     messages[Math.min(count - 1, messages.length - 1)];
 }
 
-function clearFeedback (){
-    // console.log ("ClearFeedback")
-    const feedback = document.getElementById("feedback");
-    feedback.innerHTML = "";
+function clearFeedback() {
+  // console.log ("ClearFeedback")
+  const feedback = document.getElementById("feedback");
+  feedback.innerHTML = "";
 }
 const company = document.getElementById("company");
-company.addEventListener ("click", clearFeedback);
+company.addEventListener("click", clearFeedback);
 
 const role = document.getElementById("role");
-role.addEventListener ("click", clearFeedback);
+role.addEventListener("click", clearFeedback);
 
 const notes = document.getElementById("notes");
-notes.addEventListener ("click", clearFeedback);
+notes.addEventListener("click", clearFeedback);
 
 const applicationStatus = document.getElementById("applicationStatus");
-applicationStatus.addEventListener ("click", clearFeedback);
+applicationStatus.addEventListener("click", clearFeedback);

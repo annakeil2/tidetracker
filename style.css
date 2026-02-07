@@ -1,8 +1,8 @@
 body {
   font-family: "crossorigin", sans-serif;
   margin: 0;
-  background: #e8f6f6;
-  color: #430a3c;
+  background: #737676;
+  color: #000009;
 }
 
 .pagewrapper {
@@ -12,7 +12,7 @@ body {
 
 header {
   text-align: center;
-  background: linear-gradient(135deg, #7ce7b0, #e169d3);
+  background: linear-gradient(100deg, #f0d317, #cd22dd);
   padding: 2.5rem 1rem;
 }
 
@@ -23,7 +23,7 @@ main {
 }
 
 section {
-  background: rgb(188, 227, 206);
+  background: rgb(128, 223, 205);
   padding: 1.5rem;
   border-radius: 21px;
   margin-bottom: 2rem;
@@ -47,7 +47,7 @@ input, select, textarea {
   padding: 0.7rem;
   font-size: 1rem;
   border-radius: 10px;
-  border: 1px solid #f98cf5;
+  border: 1px solid #cd22dd;
   flex: 1;
 }
 
@@ -62,7 +62,7 @@ textarea {
 }
 
 button {
-  background: #e049d184;
+  background: #be53c8;
   border: none;
   padding: 0.8rem;
   font-size: 1.4rem;
@@ -72,7 +72,7 @@ button {
 }
 
 button:hover {
-  background: #4ade80;
+  background: #83e1a6;
 }
 
 #feedback {
@@ -111,8 +111,8 @@ ul {
 }
 
 .application.priority {
-  background: #fce7f3; /* soft pink */
-  border: 2px solid #f9a8d4;
+  background: #ecd1eb; /* soft pink */
+  border: 2px solid #ed3299;
 }
 
 .application-header {
@@ -145,7 +145,7 @@ ul {
 }
 
 .delete-btn {
-  background: #fca5a5;
+  background: #be53c8;
   border: none;
   padding: 0.4rem 0.7rem;
   border-radius: 999px;
