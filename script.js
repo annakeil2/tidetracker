@@ -1,5 +1,6 @@
 const form = document.getElementById("ApplicationForm");
-const list = document.getElementById("applicationList");
+const applicationsList = document.getElementById("applicationList");
+const rejectedApplicationList = document.getElementById("rejectedApplicationList");
 const progressFill = document.getElementById("progressFill");
 const encouragement = document.getElementById("encouragement");
 const feedback = document.getElementById("feedback");
@@ -26,12 +27,17 @@ const messages = [
 
 let applications = loadApplications();
 for (let i = 0; i < applications.length; i++) {
-  addApplicationToDOM(applications[i])
+  if (applications[i].rawStatus === "Rejected"){
+    addApplicationToDOM(applications[i], rejectedApplicationList)
+  }
+  else {
+    addApplicationToDOM(applications[i], applicationsList);
+  }
 }
 
+
+
 // updateProgress();
-
-
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -70,7 +76,12 @@ form.addEventListener("submit", function (event) {
 
   applications.push(application);
 
-  addApplicationToDOM(application);
+  if (application.rawStatus === "Rejected"){
+    addApplicationToDOM(application, rejectedApplicationList)
+  }
+  else {
+    addApplicationToDOM(application, applicationsList);
+  }
   updateProgress();
 
   saveApplications(applications);
@@ -145,7 +156,7 @@ function timeStamp(date) {
   return (`${year}-${month}-${day}`);
 }
 
-function addApplicationToDOM(app) {
+function addApplicationToDOM(app, targetElement) {
   const li = document.createElement("li");
   li.className = "application";
   if (app.priority) {
@@ -188,7 +199,7 @@ function addApplicationToDOM(app) {
     saveApplications(applications);
   });
 
-  list.appendChild(li);
+  targetElement.appendChild(li);
   const generatedDropdown = document.getElementById(generatedDropdownId);
   createDropdown(
     generatedDropdown,
@@ -199,6 +210,12 @@ function addApplicationToDOM(app) {
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
       saveApplications(applications);
+      if (app.rawStatus === "Rejected"){
+        rejectedApplicationList.appendChild(li);
+      }
+      else {
+        applicationsList.appendChild(li);
+      }
     }
   );
 }
