@@ -4,6 +4,8 @@ const progressFill = document.getElementById("progressFill");
 const encouragement = document.getElementById("encouragement");
 const feedback = document.getElementById("feedback");
 
+let deletedApplicationCount = 0;
+
 const applicationStatusMap = {
   "Applied": "Applied",
   "InitialScreen": "Initial Screen",
@@ -172,11 +174,16 @@ function addApplicationToDOM(app) {
     ${notesWrapper}
     `;
 
-  li.querySelector(".delete-btn").addEventListener("click", () => {
+  li.querySelector(".delete-btn").addEventListener("click", function() {
+    const result = window.confirm('Are you sure you want to delete this application?');
+    if (!result) {
+      return;
+    }
     applications = applications.filter(function (a) {
       return a !== app;
     });
     li.remove();
+    deletedApplicationCount++;
     updateProgress();
     saveApplications(applications);
   });
@@ -197,7 +204,7 @@ function addApplicationToDOM(app) {
 }
 
 function updateProgress() {
-  const count = applications.length;
+  const count = applications.length + deletedApplicationCount;
   const goal = 5;
 
   progressFill.style.width =
