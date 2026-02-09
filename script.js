@@ -247,3 +247,8 @@ notes.addEventListener("click", clearFeedback);
 
 const applicationStatus = document.getElementById("applicationStatus");
 applicationStatus.addEventListener("click", clearFeedback);
+
+const backToTop = document.getElementById("BackToTop");
+backToTop.addEventListener("click", function(){
+  window.scrollTo(0,0);
+});

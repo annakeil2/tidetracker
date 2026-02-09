@@ -159,6 +159,15 @@ ul {
   justify-content: space-between;
 }
 
+#BackToTop{
+  position: fixed;
+  bottom: 3rem;
+  right: 41rem;
+  color:#e5f413;
+  background-color: #1e2c25;
+  padding: 2px;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .form-wrapper {

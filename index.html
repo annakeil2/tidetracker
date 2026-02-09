@@ -16,12 +16,18 @@
     <header>
       <h1>OneMoreApp</h1>
       <p class="subtitle">Look at you owning your job search, one step at a time</p>
+      <nav class="topnav">
+                <a href="#AddApplication">Add an Application</a>
+                <a href="#DailyGoal">Daily Goal</a>
+                <a href="#ActiveApplications">Active Applications</a>
+                <a href="#RejectedApplications_SeaOfDreams">Sea of Dreams</a>
+            </nav>
     </header>
 
     <main>
       <!-- FORM SECTION -->
       <section class="form-section">
-        <h2>Add an application</h2>
+        <h2 id="AddApplication">Add an Application</h2>
         <h3>Only focus on the next step</h3>
         <form id="ApplicationForm">
           <div class="form-wrapper">
@@ -52,7 +58,7 @@
 
       <!-- STATS SECTION -->
       <section class="stats-section">
-        <h2>Daily goal</h2>
+        <h2 id="DailyGoal">Daily Goal</h2>
         <p class="goal-text">Aim for <strong>5 applications</strong> today</p>
 
         <div class="progress-bar">
@@ -65,12 +71,12 @@
       <!-- APPLICATION LIST -->
 
       <section class="list-section">
-        <h2>Your applications</h2>
+        <h2 id="ActiveApplications">Active Applications</h2>
         <ul id="applicationList"></ul>
       </section>
 
        <section class="list-section">
-        <h2>Rejected Applications (Sea of Dreams)</h2>
+        <h2 id="RejectedApplications_SeaOfDreams">Rejected Applications (Sea of Dreams)</h2>
         <ul id="rejectedApplicationList"></ul>
       </section>
 
@@ -80,8 +86,10 @@
       <p>OneMoreApp · Built for you by Imaginary Recruiting Agency.</p>
     </footer>
 
-    <script src="script.js"></script>
   </div>
+
+  <div id="BackToTop">[back to top]</div>
+  <script src="script.js"></script>
 </body>
 
 </html>
