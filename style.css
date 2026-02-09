@@ -61,7 +61,7 @@ textarea {
   cursor: pointer;
 }
 
-button {
+#submitbutton {
   background: #be53c8;
   border: none;
   padding: 0.8rem;
@@ -145,6 +145,7 @@ ul {
 }
 
 .delete-btn {
+  width: 44%;
   background: #be53c8;
   border: none;
   padding: 0.4rem 0.7rem;
@@ -174,9 +175,21 @@ img {
   padding: 2px;
 }
 
+footer{
+  align-self: center;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .form-wrapper {
     flex-direction: column;
+  }
+
+  #BackToTop{
+    display: none;
+  }
+
+  #submitbutton{
+    width: 100%;
   }
 }
