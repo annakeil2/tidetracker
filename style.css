@@ -32,7 +32,7 @@ header {
 }
 
 .topnav a:hover {
-  color: rgb(168, 226, 215);
+  color: rgb(205, 255, 246);
 }
 
 main {
@@ -42,7 +42,7 @@ main {
 }
 
 section {
-  background: rgb(128, 223, 205);
+  background: rgb(186, 226, 219);
   padding: 1.5rem;
   border-radius: 21px;
   margin-bottom: 2rem;
@@ -81,7 +81,7 @@ textarea {
 }
 
 #submitbutton {
-  background: #be53c8;
+  background: #cd22dd;
   border: none;
   padding: 0.8rem;
   font-size: 1.4rem;
@@ -103,7 +103,7 @@ button:hover {
 .progress-bar {
   width: 100%;
   height: 18px;
-  background: #fde68a;
+  background: #f5e39c;
   border-radius: 999px;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -112,7 +112,7 @@ button:hover {
 #progressFill {
   height: 100%;
   width: 0%;
-  background: #86efac;
+  background: #8effb8;
   transition: width 0.3s ease;
 }
 
@@ -131,7 +131,7 @@ ul {
 
 .application.priority {
   background: #ecd1eb; /* soft pink */
-  border: 2px solid #ed3299;
+  border: 2px solid  #cd22dd;
 }
 
 .application-header {
@@ -165,7 +165,7 @@ ul {
 
 .delete-btn {
   width: 44%;
-  background: #be53c8;
+  background:  #cd22dd;
   border: none;
   padding: 0.4rem 0.7rem;
   border-radius: 999px;
