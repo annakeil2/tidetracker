@@ -45,6 +45,7 @@ form.addEventListener("submit", function (event) {
   const role = document.getElementById("role").value.trim();
   const rawStatus = document.getElementById("applicationStatus").value;
   const notes = document.getElementById("notes").value.trim();
+  const linkUrl = document.getElementById("link_to_job_ad").value.trim();
   const priority = document.getElementById("priority").checked;
 
   const status = applicationStatusMap[rawStatus]
@@ -61,6 +62,11 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
+  if (linkUrl.length && !(linkUrl.startsWith("https://") || linkUrl.startsWith("http://"))){
+    feedback.innerHTML = "You must enter a valid URL."
+    feedback.style.color = "#eb4325ff";
+    return;
+  }
 
   // Application object
   const application = {
@@ -69,6 +75,7 @@ form.addEventListener("submit", function (event) {
     status,
     rawStatus,
     notes,
+    linkUrl,
     priority,
     createdAt: new Date()  //this is a constructor
   };
@@ -112,6 +119,7 @@ function loadApplications() {
       status: result.status,
       rawStatus: result.rawStatus,
       notes: result.notes,
+      linkUrl: result.linkUrl ?? "",
       priority: result.priority,
       createdAt: new Date(result.createdAt)
     };
@@ -173,6 +181,12 @@ function addApplicationToDOM(app, targetElement) {
       </div>`
     : "";
 
+  const linkWrapper = (app.notes)
+    ? `<div class="link-wrapper">
+        <a href="${app.linkUrl}" target="_blank" class="link">${app.linkUrl}</a>
+      </div>`
+    : "";
+
   li.innerHTML = `
     <div class="application-header">
       <div class="app-details">
@@ -184,6 +198,7 @@ function addApplicationToDOM(app, targetElement) {
       <button class="delete-btn">Delete</button>
     </div>
     ${notesWrapper}
+    ${linkWrapper}
     `;
 
   li.querySelector(".delete-btn").addEventListener("click", function() {
