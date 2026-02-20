@@ -26,12 +26,12 @@ const messages = [
 ];
 
 let applications = loadApplications();
-for (let i = 0; i < applications.length; i++) {
-  if (applications[i].rawStatus === "Rejected"){
-    addApplicationToDOM(applications[i], rejectedApplicationList)
+for (const application of applications) {
+  if (application.rawStatus === "Rejected"){
+    addApplicationToDOM(application, rejectedApplicationList)
   }
   else {
-    addApplicationToDOM(applications[i], applicationsList);
+    addApplicationToDOM(application, applicationsList);
   }
 }
 
@@ -87,6 +87,9 @@ form.addEventListener("submit", function (event) {
   }
   else {
     addApplicationToDOM(application, applicationsList);
+    if (application.rawStatus === "Offered"){
+      offerCelebrate();
+    }
   }
   updateProgress();
 
@@ -231,6 +234,9 @@ function addApplicationToDOM(app, targetElement) {
       }
       else {
         applicationsList.appendChild(li);
+        if (app.rawStatus === "Offered"){
+          offerCelebrate();
+        }
       }
     }
   );
@@ -271,6 +277,14 @@ function clearFeedback() {
   // console.log ("ClearFeedback")
   const feedback = document.getElementById("feedback");
   feedback.innerHTML = "";
+}
+
+function offerCelebrate (){
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
 }
 const company = document.getElementById("company");
 company.addEventListener("click", clearFeedback);
