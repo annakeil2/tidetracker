@@ -81,7 +81,7 @@ textarea {
 }
 
 #submitbutton {
-  background: #cd22dd;
+  background: #c972d1;
   border: none;
   padding: 0.8rem;
   font-size: 1.4rem;
@@ -165,7 +165,7 @@ ul {
 
 .delete-btn {
   width: 44%;
-  background:  #cd22dd;
+  background:  #c972d1;
   border: none;
   padding: 0.4rem 0.7rem;
   border-radius: 999px;

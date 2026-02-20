@@ -35,10 +35,9 @@ for (let i = 0; i < applications.length; i++) {
   }
 }
 
-
-
-// updateProgress();
-
+/** 
+ * form submits, creates applications
+ */
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -163,11 +162,13 @@ function addApplicationToDOM(app, targetElement) {
     li.classList.add("priority");
   }
 
+  const notesLabel = "Your notes: ";
   const createdAt = app.createdAt.getTime();
   const generatedDropdownId = `generatedDropdown${createdAt}`;
+  const notesId = `note${createdAt}`;
   const notesWrapper = (app.notes)
     ? `<div class="notes-wrapper">
-        <div class="notes">Your notes: ${app.notes}</div>
+        <div id="${notesId}" class="notes">${notesLabel}${app.notes}</div>
         <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
       </div>`
     : "";
@@ -218,6 +219,26 @@ function addApplicationToDOM(app, targetElement) {
       }
     }
   );
+
+  const notesElement = document.getElementById(notesId);
+  const saveNote = function(){
+    const textAreaToSave = notesElement.getElementsByTagName("textarea")[0];
+    app.notes = textAreaToSave.value; 
+    console.log(app, textAreaToSave);
+    saveApplications(applications);
+    textAreaToSave.removeEventListener("focusout", saveNote);
+    notesElement.innerHTML = notesLabel + textAreaToSave.value;
+    notesElement.addEventListener("click", clearTextAndCreateTextArea);
+  };
+  const clearTextAndCreateTextArea = function(){
+    const textArea = document.createElement("textarea");   
+    notesElement.innerHTML = "";
+    textArea.value = app.notes;
+    notesElement.appendChild (textArea);
+    notesElement.removeEventListener("click", clearTextAndCreateTextArea);
+    textArea.addEventListener("focusout", saveNote);
+  };
+  notesElement.addEventListener("click", clearTextAndCreateTextArea);
 }
 
 function updateProgress() {
