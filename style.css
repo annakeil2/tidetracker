@@ -110,6 +110,10 @@ button:hover {
   background: #83e1a6;
 }
 
+#submitbutton:hover {
+  background: #83e1a6;
+}
+
 #feedback {
   margin-top: 0.4rem;
   font-weight: bold;
