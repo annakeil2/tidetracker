@@ -230,18 +230,26 @@ function addApplicationToDOM(app, targetElement) {
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
       saveApplications(applications);
-      if (app.rawStatus !== previousStatus){
-        if (app.rawStatus === "Rejected") {
-          rejectedApplicationList.appendChild(li);
-        }
-        else {
-          applicationsList.appendChild(li);
-          if (app.rawStatus === "Offered") {
-            offerCelebrate();
-          }
-        }
+      if (
+        previousStatus !== "Rejected"
+        && app.rawStatus === "Rejected"
+      ) {
+        rejectedApplicationList.appendChild(li);
       }
-      
+
+      if (
+        previousStatus === "Rejected"
+        && app.rawStatus !== "Rejected"
+      ){
+        applicationsList.appendChild(li); 
+      }
+
+      if (
+        previousStatus !== "Offered"
+        && app.rawStatus === "Offered"
+      ) {
+        offerCelebrate();
+      }
     }
   );
 
