@@ -7,8 +7,11 @@ This application has been designed to assist job seekers with their application 
 
 #### Feature 1 – Adding New Job Applications
 This feature allows users to add new job applications by entering the company name, the role applied for, and optional additional notes (guidelines are provided within the notes field as prompts).
+
 The company name and role fields are mandatory, and users must enter at least two characters in each field before submitting a new application. If the requirement is not met, a validation message is displayed.
+
 The notes section and the option to include a link to the original job advertisement are optional. The URL field includes validation to ensure a correctly formatted link is entered.
+
 For consistency and ease of use, the application status can be selected from a drop-down list. All active applications (i.e. those not marked as rejected or deleted) are automatically displayed in the ‘Active Applications’ list.
 
 
@@ -40,16 +43,23 @@ To further enhance the gamified experience, a confetti animation is triggered wh
 When a user clicks the ‘Delete’ button for a previously added application, a confirmation alert appears to verify their intention.
 This feature helps prevent accidental deletion of records, thereby supporting accurate and reliable data management.
 
+#### Feature 11 – The Usage of Local Storage
+Job applications are saved to and loaded from local storage allowing users to continue their work after they close and reopen their browser. This adds to the overall usefulness of the app.
 
 ## Design Choices
 
 #### Colours
 I aimed to choose playful, bright colors for the project because I wanted the application to make an otherwise mundane process (submitting applications, which can take a long time and involve uncertainty) more enjoyable and a more positive experience. I feel the colours engage users, and I made sure to use a cohesive colour palette. I made the daily goal bar yellow as it is a strong complementary colour to the greenish background of the form, drawing attention to that part of the application and encouraging user engagement.
-	I also paid special attention to accessibility and double-checked that colour contrast levels were appropriate. The colours also complement the main feature of the page, which is the confetti effect celebrating any ‘Offered’ status updates.
-	As for the two sets of action buttons, I made them stand out through special styling.
-	A white background for the otherwise colourful application helps accentuate the bright colours and encourages users to interact with the features.
+
+I also paid special attention to accessibility and double-checked that colour contrast levels were appropriate. The colours also complement the main feature of the page, which is the confetti effect celebrating any ‘Offered’ status updates.
+
+As for the two sets of action buttons, I made them stand out through special styling.
+
+A white background for the otherwise colourful application helps accentuate the bright colours and encourages users to interact with the features.
 The greenish colour used in the form (the main feature of the application) and in the hover effect for buttons reflects associations with progress, success, and completion, helping to signal a positive user experience.
-	The soft pink colour chosen for highlighted (priority, ‘dream job alert!’) applications signals importance without relying on aggressive red tones, while also maintaining design cohesion within the purple colour family.
+
+The soft pink colour chosen for highlighted (priority, ‘dream job alert!’) applications signals importance without relying on aggressive red tones, while also maintaining design cohesion within the purple colour family.
+
 Consistent reuse of accent colours was a conscious decision to keep the application professional and cohesive.
 
 #### Fonts/Typography
@@ -70,17 +80,26 @@ Include wireframes (use markdown cheatsheet for markdown image syntax)
 
 #### Challenges Faced
 One big challenge I faced throughout implementation was a recurring one. The bug occurred when user changed application status, the list of applications were getting reordered. This was happenning because I was just re-adding applications to the list and it was appending it to the bottom of the list. First, I tried checking if the state has changed and only adding it if I had, but this did not fix the problem because several of my statuses (1st Interview, Screening) left the application in the same list, so changing from one of these statuses to another would still keep reordering the list. 
-	I finally solved the problem by checking if the type was previously rejected or not rejected as that is the only status that appeared in the other list. This ultimate solution managed to fix the bug. 
+
+I finally solved the problem by checking if the type was previously rejected or not rejected as that is the only status that appeared in the other list. This ultimate solution managed to fix the bug. 
+
 Another challenge I encountered was when I was using an accessibility validator called WAVE Accessibility Checker. The validator showed I miss labels from my form (input field labels) and although I had the input request prompt in the field itself, the validator stated it might not be a good solution for certain users.
-	When I added labels as advised, my whole form layout got disorganized and noisy in terms of the text layout, resulting in poor design so I looked for another solution. I soon found a way to add hidden labels to the HTML code, but this ultimately did not pass the same validator check so I needed to opt out of using labels altogether due to design purposes. This is definitely an important aspect to keep in mind for a potential future roll-out.
+
+When I added labels as advised, my whole form layout got disorganized and noisy in terms of the text layout, resulting in poor design so I looked for another solution. I soon found a way to add hidden labels to the HTML code, but this ultimately did not pass the same validator check so I needed to opt out of using labels altogether due to design purposes. This is definitely an important aspect to keep in mind for a potential future roll-out.
 
 #### Interactivity
-I implemented the progress bar to encourage users to submit applications in order to reach their daily goal. A ‘scroll to top’ button was also added to the application. A confetti interactive effect has been implemented to mark the end goal, i.e. when an application reaches ‘Offered’ status. Interactivity was further enhanced by adding a feature that allows users to update notes and application status, as well as a feature that sorts applications into active and rejected sections. When users click on the delete button for any application, an alert window pops up to ask for confirmation.
+I implemented the job application progress fill bar to encourage users to submit applications in order to reach their daily goal. A ‘scroll to top’ button was also added to the page. Interactivity was further enhanced by adding a feature that allows users to update notes and application status, as well as a feature that sorts applications into active and rejected sections. When users click on the delete button for any application, an alert window pops up to ask for confirmation before actual deletion. 
+Job applications are saved to and loaded from local storage allowing users to continue their work after they close and reopen their browser. This adds to the overall usefulness of the app.
+A confetti interactive effect has been implemented to mark the end goal, i.e. when an application reaches ‘Offered’ status.
 
 ## Deployed site
 This site has been deployed to GitHub Pages at the URL below:
 
 https://annakeil2.github.io/tidetracker/
 
+## Github Repository Link:
 
-For additional information, please see Planning Analysys Sheet and Wireframe I submitted.
+https://github.com/annakeil2/tidetracker
+
+
+For additional information, please see document titled 'Documentation' including planning analysis and wireframe I submitted along with my assessment submission.

@@ -1,4 +1,3 @@
-// jshint esversion: 10
 const form = document.getElementById("ApplicationForm");
 const applicationsList = document.getElementById("applicationList");
 const rejectedApplicationList = document.getElementById("rejectedApplicationList");
