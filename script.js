@@ -226,40 +226,46 @@ function addApplicationToDOM(app, targetElement) {
     app.rawStatus,
     function (event) {
       console.log(event)
+      const previousStatus = app.rawStatus;
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
       saveApplications(applications);
-      if (app.rawStatus === "Rejected") {
-        rejectedApplicationList.appendChild(li);
-      }
-      else {
-        applicationsList.appendChild(li);
-        if (app.rawStatus === "Offered") {
-          offerCelebrate();
+      if (app.rawStatus !== previousStatus){
+        if (app.rawStatus === "Rejected") {
+          rejectedApplicationList.appendChild(li);
+        }
+        else {
+          applicationsList.appendChild(li);
+          if (app.rawStatus === "Offered") {
+            offerCelebrate();
+          }
         }
       }
+      
     }
   );
 
-  const notesElement = document.getElementById(notesId);
-  const saveNote = function () {
-    const textAreaToSave = notesElement.getElementsByTagName("textarea")[0];
-    app.notes = textAreaToSave.value;
-    console.log(app, textAreaToSave);
-    saveApplications(applications);
-    textAreaToSave.removeEventListener("focusout", saveNote);
-    notesElement.innerHTML = notesLabel + textAreaToSave.value;
+  if (app.notes){
+    const notesElement = document.getElementById(notesId);
+    const saveNote = function () {
+      const textAreaToSave = notesElement.getElementsByTagName("textarea")[0];
+      app.notes = textAreaToSave.value;
+      console.log(app, textAreaToSave);
+      saveApplications(applications);
+      textAreaToSave.removeEventListener("focusout", saveNote);
+      notesElement.innerHTML = notesLabel + textAreaToSave.value;
+      notesElement.addEventListener("click", clearTextAndCreateTextArea);
+    };
+    const clearTextAndCreateTextArea = function () {
+      const textArea = document.createElement("textarea");
+      notesElement.innerHTML = "";
+      textArea.value = app.notes;
+      notesElement.appendChild(textArea);
+      notesElement.removeEventListener("click", clearTextAndCreateTextArea);
+      textArea.addEventListener("focusout", saveNote);
+    };
     notesElement.addEventListener("click", clearTextAndCreateTextArea);
-  };
-  const clearTextAndCreateTextArea = function () {
-    const textArea = document.createElement("textarea");
-    notesElement.innerHTML = "";
-    textArea.value = app.notes;
-    notesElement.appendChild(textArea);
-    notesElement.removeEventListener("click", clearTextAndCreateTextArea);
-    textArea.addEventListener("focusout", saveNote);
-  };
-  notesElement.addEventListener("click", clearTextAndCreateTextArea);
+  }
 }
 
 function updateProgress() {
