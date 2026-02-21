@@ -27,7 +27,7 @@ const messages = [
 
 let applications = loadApplications();
 for (const application of applications) {
-  if (application.rawStatus === "Rejected"){
+  if (application.rawStatus === "Rejected") {
     addApplicationToDOM(application, rejectedApplicationList)
   }
   else {
@@ -62,7 +62,7 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
-  if (linkUrl.length && !(linkUrl.startsWith("https://") || linkUrl.startsWith("http://"))){
+  if (linkUrl.length && !(linkUrl.startsWith("https://") || linkUrl.startsWith("http://"))) {
     feedback.innerHTML = "You must enter a valid URL."
     feedback.style.color = "#eb4325ff";
     return;
@@ -82,12 +82,12 @@ form.addEventListener("submit", function (event) {
 
   applications.push(application);
 
-  if (application.rawStatus === "Rejected"){
+  if (application.rawStatus === "Rejected") {
     addApplicationToDOM(application, rejectedApplicationList)
   }
   else {
     addApplicationToDOM(application, applicationsList);
-    if (application.rawStatus === "Offered"){
+    if (application.rawStatus === "Offered") {
       offerCelebrate();
     }
   }
@@ -179,32 +179,32 @@ function addApplicationToDOM(app, targetElement) {
   const notesId = `note${createdAt}`;
   const notesWrapper = (app.notes)
     ? `<div class="notes-wrapper">
-        <div id="${notesId}" class="notes">${notesLabel}${app.notes}</div>
-        <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
-      </div>`
+          <div id="${notesId}" class="notes">${notesLabel}${app.notes}</div>
+          <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
+        </div>`
     : "";
 
   const linkWrapper = (app.notes)
     ? `<div class="link-wrapper">
-        <a href="${app.linkUrl}" target="_blank" class="link">${app.linkUrl}</a>
-      </div>`
+          <a href="${app.linkUrl}" target="_blank" class="link">${app.linkUrl}</a>
+        </div>`
     : "";
 
   li.innerHTML = `
-    <div class="application-header">
-      <div class="app-details">
-        ${(app.priority) ? "⭐" : ""}
-        <span>${app.company}</span>
-        <span>${app.role}</span>
-        <span id="${generatedDropdownId}" class="status-${app.rawStatus}"></span>
+      <div class="application-header">
+        <div class="app-details">
+          ${(app.priority) ? "⭐" : ""}
+          <span>${app.company}</span>
+          <span>${app.role}</span>
+          <span id="${generatedDropdownId}" class="status-${app.rawStatus}"></span>
+        </div>
+        <button class="delete-btn">Delete</button>
       </div>
-      <button class="delete-btn">Delete</button>
-    </div>
-    ${notesWrapper}
-    ${linkWrapper}
-    `;
+      ${notesWrapper}
+      ${linkWrapper}
+      `;
 
-  li.querySelector(".delete-btn").addEventListener("click", function() {
+  li.querySelector(".delete-btn").addEventListener("click", function () {
     const result = window.confirm('Are you sure you want to delete this application?');
     if (!result) {
       return;
@@ -229,12 +229,12 @@ function addApplicationToDOM(app, targetElement) {
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
       saveApplications(applications);
-      if (app.rawStatus === "Rejected"){
+      if (app.rawStatus === "Rejected") {
         rejectedApplicationList.appendChild(li);
       }
       else {
         applicationsList.appendChild(li);
-        if (app.rawStatus === "Offered"){
+        if (app.rawStatus === "Offered") {
           offerCelebrate();
         }
       }
@@ -242,20 +242,20 @@ function addApplicationToDOM(app, targetElement) {
   );
 
   const notesElement = document.getElementById(notesId);
-  const saveNote = function(){
+  const saveNote = function () {
     const textAreaToSave = notesElement.getElementsByTagName("textarea")[0];
-    app.notes = textAreaToSave.value; 
+    app.notes = textAreaToSave.value;
     console.log(app, textAreaToSave);
     saveApplications(applications);
     textAreaToSave.removeEventListener("focusout", saveNote);
     notesElement.innerHTML = notesLabel + textAreaToSave.value;
     notesElement.addEventListener("click", clearTextAndCreateTextArea);
   };
-  const clearTextAndCreateTextArea = function(){
-    const textArea = document.createElement("textarea");   
+  const clearTextAndCreateTextArea = function () {
+    const textArea = document.createElement("textarea");
     notesElement.innerHTML = "";
     textArea.value = app.notes;
-    notesElement.appendChild (textArea);
+    notesElement.appendChild(textArea);
     notesElement.removeEventListener("click", clearTextAndCreateTextArea);
     textArea.addEventListener("focusout", saveNote);
   };
@@ -279,7 +279,7 @@ function clearFeedback() {
   feedback.innerHTML = "";
 }
 
-function offerCelebrate (){
+function offerCelebrate() {
   confetti({
     particleCount: 100,
     spread: 70,
@@ -299,6 +299,6 @@ const applicationStatus = document.getElementById("applicationStatus");
 applicationStatus.addEventListener("click", clearFeedback);
 
 const backToTop = document.getElementById("BackToTop");
-backToTop.addEventListener("click", function(){
-  window.scrollTo(0,0);
+backToTop.addEventListener("click", function () {
+  window.scrollTo(0, 0);
 });
