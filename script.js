@@ -1,3 +1,4 @@
+// jshint esversion: 10
 const form = document.getElementById("ApplicationForm");
 const applicationsList = document.getElementById("applicationList");
 const rejectedApplicationList = document.getElementById("rejectedApplicationList");
@@ -28,7 +29,7 @@ const messages = [
 let applications = loadApplications();
 for (const application of applications) {
   if (application.rawStatus === "Rejected") {
-    addApplicationToDOM(application, rejectedApplicationList)
+    addApplicationToDOM(application, rejectedApplicationList);
   }
   else {
     addApplicationToDOM(application, applicationsList);
@@ -48,7 +49,7 @@ form.addEventListener("submit", function (event) {
   const linkUrl = document.getElementById("link_to_job_ad").value.trim();
   const priority = document.getElementById("priority").checked;
 
-  const status = applicationStatusMap[rawStatus]
+  const status = applicationStatusMap[rawStatus];
 
   if (!company || !role) {
     feedback.textContent = "Future you needs at least a company and a role in order to keep track.";
@@ -63,7 +64,7 @@ form.addEventListener("submit", function (event) {
   }
 
   if (linkUrl.length && !(linkUrl.startsWith("https://") || linkUrl.startsWith("http://"))) {
-    feedback.innerHTML = "You must enter a valid URL."
+    feedback.innerHTML = "You must enter a valid URL.";
     feedback.style.color = "#eb4325ff";
     return;
   }
@@ -83,7 +84,7 @@ form.addEventListener("submit", function (event) {
   applications.push(application);
 
   if (application.rawStatus === "Rejected") {
-    addApplicationToDOM(application, rejectedApplicationList)
+    addApplicationToDOM(application, rejectedApplicationList);
   }
   else {
     addApplicationToDOM(application, applicationsList);
@@ -95,8 +96,8 @@ form.addEventListener("submit", function (event) {
 
   saveApplications(applications);
 
-  feedback.textContent = priority
-    ? "Priority added. Eyes on this one!"
+  feedback.textContent = (priority) 
+    ? "Priority added. Eyes on this one!" 
     : "Application successfully added";
 
   feedback.style.color = "#19b954ff";
@@ -122,7 +123,7 @@ function loadApplications() {
       status: result.status,
       rawStatus: result.rawStatus,
       notes: result.notes,
-      linkUrl: result.linkUrl ?? "",
+      linkUrl: (result.linkUrl) ? result.linkUrl : "",
       priority: result.priority,
       createdAt: new Date(result.createdAt)
     };
@@ -138,9 +139,9 @@ function createDropdown(parent, optionsMap, selectedKey, onChange) {
   for (let key in optionsMap) {
     const text = optionsMap[key];
     const selected = (selectedKey === key) ? " selected" : "";
-    options.push(`<option value="${key}"${selected}>${text}</option>`)
+    options.push(`<option value="${key}"${selected}>${text}</option>`);
   }
-  select.innerHTML = options.join("\n")
+  select.innerHTML = options.join("\n");
   select.addEventListener("change", onChange);
   parent.appendChild(select);
 
@@ -177,18 +178,20 @@ function addApplicationToDOM(app, targetElement) {
   const createdAt = app.createdAt.getTime();
   const generatedDropdownId = `generatedDropdown${createdAt}`;
   const notesId = `note${createdAt}`;
-  const notesWrapper = (app.notes)
-    ? `<div class="notes-wrapper">
+  let notesWrapper = ""; 
+  if (app.notes){
+    notesWrapper = `<div class="notes-wrapper">
           <div id="${notesId}" class="notes">${notesLabel}${app.notes}</div>
           <time datetime="${timeStamp(app.createdAt)}">${timeStamp(app.createdAt)}</time>
-        </div>`
-    : "";
+        </div>`;
+  }
 
-  const linkWrapper = (app.notes)
-    ? `<div class="link-wrapper">
+  let linkWrapper = "";
+  if (app.notes){
+    linkWrapper = `<div class="link-wrapper">
           <a href="${app.linkUrl}" target="_blank" class="link">${app.linkUrl}</a>
-        </div>`
-    : "";
+        </div>`;
+  } 
 
   li.innerHTML = `
       <div class="application-header">
@@ -225,7 +228,7 @@ function addApplicationToDOM(app, targetElement) {
     applicationStatusMap,
     app.rawStatus,
     function (event) {
-      console.log(event)
+      console.log(event);
       const previousStatus = app.rawStatus;
       app.rawStatus = event.target.value;
       app.status = applicationStatusMap[event.target.value];
